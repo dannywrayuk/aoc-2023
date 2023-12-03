@@ -73,8 +73,6 @@ const numbers = dataArray.map((line, yId) => {
   return line.reduce((sum, next, xId) => {
     if (next === "*") {
       const connected = getNumbersAt(xId, yId);
-      console.log(connected);
-
       if (connected.length === 2) {
         sum += productArray(connected);
       }
