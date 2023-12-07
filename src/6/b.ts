@@ -3,11 +3,15 @@
 const file = Bun.file("./src/6/data.txt");
 const text = await file.text();
 
-const lines = text.split("\n").map((x) => x.split(":")[1].trim().split(/\s+/g));
-const data = lines[0].map((x, id) => ({
-  time: Number(x),
-  distance: Number(lines[1][id]),
-}));
+const lines = text
+  .split("\n")
+  .map((x) => x.split(":")[1].trim().replaceAll(/\s+/g, ""));
+const data = [
+  {
+    time: Number(lines[0]),
+    distance: Number(lines[1]),
+  },
+];
 
 // (time*t - t)t > distance
 
@@ -18,9 +22,5 @@ const minMax = data.map((x) => ({
 
 const numSol = minMax.map((x) => (x.min === x.max ? 0 : x.max - x.min - 1));
 
-const productArray = (x: number[]) => x.reduce((sum, next) => sum * next, 1);
-
-const product = productArray(numSol);
 console.log(minMax);
 console.log(numSol);
-console.log(product);
